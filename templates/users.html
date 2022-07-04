@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>This is the page for users</p>
+    {% if user.is_authenticated %}
+        <h2>Hey {{ user }} ! You are connected, so you can view my list</h2>
+        {% for i in my_list %}
+            <li>{{ i }}</li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

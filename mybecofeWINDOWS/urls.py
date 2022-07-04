@@ -22,5 +22,5 @@ urlpatterns = [
     path('', home_page),
     path('api/users', users_url),
     path('api/promo', promo_url),
-    path('api/recipe', recipe_url),
+    path('api/becoffe_app', recipe_url),
 ]
