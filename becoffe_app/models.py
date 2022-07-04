@@ -7,24 +7,27 @@ class Users(models.Model):
     lastName = models.CharField(max_length=100)
     email = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
-    account_type = models.BooleanField()
-    created_at = models.DateTimeField()
+    Admin = models.BooleanField()
+    created_at = models.DateField()
 
 
 class Promo(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, unique=True)
-    admin_id = models.ForeignKey(Users.id, max_length=100)
+    admin_id = models.CharField(max_length=100)
 
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, unique=True)
-    author_id = models.ForeignKey(Users.id, on_delete=True)
+    author_id = models.CharField(max_length=100)
 
 
 class Attendees(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
-    user_id = models.ForeignKey(Users.id, on_delete=True)
-    arrival_time = models.DateTimeField(max_length=100)
-    departure_time = models.DateTimeField(max_length=100)
+    user_id = models.CharField(max_length=100)
+    arrival_time = models.DateField(max_length=100)
+    departure_time = models.DateField(max_length=100)
+
+
+0

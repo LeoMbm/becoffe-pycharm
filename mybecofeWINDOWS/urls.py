@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import (home_page, users_url, promo_url, recipe_url)
+from becoffe_app.views import user_detail
 
 urlpatterns = [
     path('leo-admin/', admin.site.urls),
     path('', home_page),
     path('api/users', users_url),
     path('api/promo', promo_url),
-    path('api/becoffe_app', recipe_url),
+    path('api/recipe', recipe_url),
+    path('api/details', user_detail),
 ]
