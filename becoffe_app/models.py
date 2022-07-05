@@ -1,3 +1,4 @@
+import django.utils.timezone
 from django.db import models
 
 
@@ -8,26 +9,34 @@ class Users(models.Model):
     email = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
     Admin = models.BooleanField()
-    created_at = models.DateField()
+    created_at = models.DateTimeField(default=django.utils.timezone.now)
 
 
 class Promo(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, unique=True)
-    admin_id = models.CharField(max_length=100)
+    admin_id = models.IntegerField()
+    created_at = models.DateTimeField(default=django.utils.timezone.now)
 
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, unique=True)
-    author_id = models.CharField(max_length=100)
+    author_id = models.IntegerField()
+    created_at = models.DateTimeField(default=django.utils.timezone.now)
+    preview_at = models.DateTimeField(default=django.utils.timezone.now)
 
 
 class Attendees(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
-    user_id = models.CharField(max_length=100)
-    arrival_time = models.DateField(max_length=100)
-    departure_time = models.DateField(max_length=100)
+    user_id = models.IntegerField()
+    arrival_time = models.DateTimeField(default=django.utils.timezone.now)
+    departure_time = models.DateTimeField(default=django.utils.timezone.now)
 
 
-0
+class UsersInPromo(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    promo_id = models.IntegerField()
+    user_id = models.IntegerField()
+
+# FIXME: FIX PROBLEM WITH MIGRATIONS AND DATE AT LINE 27
