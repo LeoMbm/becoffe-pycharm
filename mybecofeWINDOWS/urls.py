@@ -19,13 +19,7 @@ from .views import (home_views, users_views, promo_views, recipe_views, register
 from becoffe_app.views import (user_detail_view, recipe_create_view)
 
 urlpatterns = [
-    path('', home_views),
-    path('register', register_views),
-    path('login', login_views),
-    path('api/users/', users_views),
-    path('api/users/<int:user_id>/', user_detail_view),
-    path('api/promo', promo_views),
+
     path('admin/', admin.site.urls),
-    path('recipe/', include('becoffe_app.urls')),
-    path('recipe/create/', recipe_create_view),
+
 ]
