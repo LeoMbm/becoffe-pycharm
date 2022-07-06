@@ -59,6 +59,28 @@
 [] Chef can edit all profile and all recipe  
 [] Create a promo system so that learners and chef can be splitted into different subgroups.
 
+# API ENDPOINT
+
+| Endpoint               | Method | Token?         | Request                  |
+|------------------------|--------|----------------|--------------------------|
+| /                      | GET    |                | Home Page                |
+| /api/users/            | GET    | only chef      | Get all users            |
+| /api/users/{id}        | GET    | only chef      | A single user from ID    |
+| /api/promo             | GET    | only chef      | All promo                |
+| /api/promo/{id}        | GET    | only chef      | A single promo from ID   |
+| /api/usersinpromo      | GET    | only chef      | All users in promo       |
+| /api/recipe            | GET    |                | All recette              |
+| /api/recipe/{id}       | GET    |                | A single recette from ID |
+| /logout                | GET    | destroy cookie | Disconnect user          |
+| /signup                | POST   |                | Create an user           |
+| /login                 | POST   | create cookie  | Login user               |
+| /api/lobby             | POST   | only chef      | Create a promo           |
+| /api/usersinpromo      | POST   | only chef      | Add user to a promo      |
+| /api/recipe            | POST   |                | Create/Send Messages     |
+| /api/users/{id}        | DELETE | only chef      | Delete an user           |
+| /api/promo/{id}        | DELETE | only chef      | Delete a promo           |
+| /api/usersinpromo/{id} | DELETE | only chef      | Delete an user in promo  |
+| /api/recipe/{id}       | DELETE |                | Delete a recette         |
 
     
 
