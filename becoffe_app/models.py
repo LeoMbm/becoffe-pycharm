@@ -21,10 +21,10 @@ class Promo(models.Model):
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
-    name = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100, unique=True)
     author_id = models.IntegerField()
     created_at = models.DateTimeField(default=django.utils.timezone.now)
-    preview_at = models.DateTimeField(default=django.utils.timezone.now)
+    preview_at = models.DateTimeField(default=django.utils.timezone.now, unique_for_date=True)
 
 
 class Attendees(models.Model):

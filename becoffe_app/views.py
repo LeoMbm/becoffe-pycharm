@@ -54,3 +54,5 @@ def recipe_delete_view(request, recipe_id):
     template_name = 'recipe_delete.html'
     context = {"object": obj}
     return render(request, template_name, context)
+
+# TODO: SECTION 7
