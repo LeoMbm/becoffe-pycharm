@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{#{% block head_title %}{{ tabs }}{% endblock %}#}
+{% block content %}
+    <form class="register-form" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="register-submit">Register</button>
+        <p>Have an account ? Login <a href="/login/">Here</a></p>
+    </form>
+{% endblock %}

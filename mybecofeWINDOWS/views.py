@@ -1,5 +1,7 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .forms import RegisterForm
+from django.contrib.auth import login, logout, authenticate
 
 
 def home_views(request):
@@ -11,13 +13,21 @@ def home_views(request):
 def login_views(request):
     my_title = "myBecoffe - Login"
     tabs_title = "myBecoffe - Login"
-    return render(request, "login.html", {"title": my_title, "tabs": tabs_title})
+    return render(request, "registration/login.html", {"title": my_title, "tabs": tabs_title})
 
 
 def register_views(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect("/login")
+    else:
+        form = RegisterForm()
+
     my_title = "myBecoffe - Register"
     tabs_title = "myBecoffe - Register"
-    return render(request, "register.html", {"title": my_title, "tabs": tabs_title})
+    return render(request, "registration/sign-up.html", {"title": my_title, "tabs": tabs_title, "form": form})
 
 
 def users_views(request):
@@ -30,6 +40,6 @@ def promo_views(request):
 
 
 def recipe_views(request):
-    return render(request, "recipe.html", {"title": "Api for becoffe_app", "tabs": "myBecoffe - Recipe"})
+    return render(request, "recipe.html", {"title": "Api for main", "tabs": "myBecoffe - Recipe"})
 
 # DONE : HERE WE HAVE GENERATED THE TITLE DYNAMICALLY

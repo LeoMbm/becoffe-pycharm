@@ -1,10 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import (Users, Promo, UsersInPromo, Recipe, Attendees)
+from .models import (user, Promo, userInPromo, Recipe, Attendees)
 
-admin.site.register(Users)
+admin.site.register(user)
 admin.site.register(Promo)
 admin.site.register(Recipe)
-admin.site.register(UsersInPromo)
+admin.site.register(userInPromo)
 admin.site.register(Attendees)

@@ -13,19 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.contrib import admin, auth
 from django.urls import path, include
-from .views import (home_views, users_views, promo_views, recipe_views, register_views, login_views)
-from becoffe_app.views import (user_detail_view, recipe_create_view)
+from .views import (home_views, users_views, promo_views, recipe_views, register_views)
+from main.views import (user_detail_view, recipe_create_view)
 
 urlpatterns = [
+    path('recipe/', include('main.urls')),
+    path('', include('django.contrib.auth.urls')),
     path('', home_views),
-    path('register', register_views),
-    path('login', login_views),
+    path('sign-up/', register_views, name='sign-up'),
     path('api/users/', users_views),
     path('api/users/<int:user_id>/', user_detail_view),
     path('api/promo', promo_views),
     path('admin/', admin.site.urls),
-    path('recipe/', include('becoffe_app.urls')),
     path('recipe/create/', recipe_create_view),
 ]

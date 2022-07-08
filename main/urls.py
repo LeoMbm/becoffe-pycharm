@@ -9,3 +9,5 @@ urlpatterns = [
     path('<int:recipe_id>/edit/', recipe_update_view),
     path('<int:recipe_id>/delete/', recipe_delete_view),
 ]
+
+# FIXME: NEED TO TRANSLATE THAT FOR REGISTRATION
