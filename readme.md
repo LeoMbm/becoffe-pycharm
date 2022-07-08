@@ -44,7 +44,8 @@
 [x] Display View  
 [?] Avoid duplicate name in DB  
 [] Request, POST, PATCH, DELETE  
-[] User registration/login   
+[x] User registration  
+[x] User login  
 [] User can create a recipe(ONE PER DAY !)  
 [] Create mechanism check system for USER (Press button for arrival and departure time)  
 [] User can view only own attendances informations  

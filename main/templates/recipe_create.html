@@ -4,5 +4,10 @@
     Create Recipe
 {% endblock %}
 {% block content %}
-    <h1>CREATE RECIPE HERE</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form }}
+        <button type="submit" class="button-create-recipe">Save Recipe</button>
+    </form>
 {% endblock %}

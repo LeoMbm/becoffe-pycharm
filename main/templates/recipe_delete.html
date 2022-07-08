@@ -4,5 +4,13 @@
     DELETE Recipe
 {% endblock %}
 {% block content %}
-    <h1>DELETE RECIPE HERE</h1>
+    <h1>All recipes</h1>
+    <p>{{ recipe.title }}</p>
+    <p>{{ recipe.author_id_id }}</p>
+    {% if user.id == recipe.author_id_id %}
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete-recipe" name="recipe-id" value="{{ recipe.id }}">Delete</button>
+        </form>
+    {% endif %}
 {% endblock %}

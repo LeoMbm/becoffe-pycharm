@@ -2,8 +2,7 @@
 {% block content %}
     <form method="post" class="login-form">
         {% csrf_token %}
-        <input type="email" class="login-email" name="email" placeholder="Email">
-        <input type="password" class="login-password" name="password" placeholder="Password">
+        {{ form }}
         <button type="submit" class="login-submit">Login</button>
         <p>Dont' have an account ? Create one <a href="/sign-up">Here</a></p>
     </form>
