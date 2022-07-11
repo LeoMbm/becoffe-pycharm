@@ -10,12 +10,6 @@ from .models import user, Recipe, Promo
 
 @login_required(login_url='/login')
 def user_detail_view(request, user_id):
-    # try:
-    #     obj = Users.objects.get(id=str(user_id))
-    # except Users.DoesNotExist:
-    #     raise Http404
-    # except ValueError:
-    #     raise Http404
     obj = get_object_or_404(user, id=str(user_id))
     template_name = 'user_detail.html'
     context = {"object": obj}
@@ -25,7 +19,8 @@ def user_detail_view(request, user_id):
 @login_required(login_url='/login')
 def recipe_list_view(request):
     # list out objects, could be search
-    qs = Recipe.objects.all()
+    qs = Recipe.objects.all().select_related('user', username=user)
+    # FIXME: JOIN LEFT RECIPE AND USER MODEL
     template_name = 'recipe_list.html'
     context = {"recipe_list": qs}
     return render(request, template_name, context)

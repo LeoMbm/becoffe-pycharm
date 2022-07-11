@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
     {% for r in recipe_list %}
         <h1>{{ r.title }}</h1>
+        <h1>{{ r.user.username }}</h1>
+
     {% endfor %}
 {% endblock %}
