@@ -2,8 +2,22 @@
 {% block content %}
 
     {% for r in recipe_list %}
-        <h1>{{ r.title }}</h1>
-        <p>Presented by <strong>{{ r.author_id.username }}</strong>, {{ r.preview_at }}</p>
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ r.title }}</h5>
+                <p class="card-text">Presented by <strong>{{ r.author_id.username }}</strong>, {{ r.preview_at }}</p>
+                {% if user.id == r.author_id_id or user.is_superuser %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" name="recipe-id" value="{{ recipe.id }}">
+                            Delete
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+
 
     {% endfor %}
 {% endblock %}

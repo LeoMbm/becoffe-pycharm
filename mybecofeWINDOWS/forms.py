@@ -10,7 +10,7 @@ User = get_user_model()
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "Chef"]
+        fields = ["first_name", "last_name", "username", "email", "is_superuser"]
 
 
 class RecipeForm(forms.ModelForm):

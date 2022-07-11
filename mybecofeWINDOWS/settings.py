@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'main',
 
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,7 +131,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/api/users'
+LOGIN_REDIRECT_URL = '/users'
 LOGOUT_REDIRECT_URL = '/login'
 AUTH_USER_MODEL = 'main.user'
 LOGIN_URL = '/login'

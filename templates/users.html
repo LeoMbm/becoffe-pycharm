@@ -1,10 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>This is the page for users</p>
     {% if user.is_authenticated %}
-        <h2>Hey {{ user }} ! You are connected, so you can view my list</h2>
-        {% for i in my_list %}
-            <li>{{ i }}</li>
-        {% endfor %}
+        <h2 class="text-capitalize">Hey {{ user }} ! You are connected, so you can all users in this school</h2>
+
+        <div class="container">
+
+            {% for i in users %}
+
+                <div class="card " style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i.username }}</h5>
+                        <hr>
+                        <p class="card-text">Name: {{ i.first_name }} {{ i.last_name }} <br>Email: {{ i.email }}</p>
+                        {% if user.id == i.id or user.is_superuser %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" name="user-id" value="{{ i.id }}">
+                                    Delete
+                                    User
+                                </button>
+                            </form>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                {#            <h1>{{ i.username }}</h1>#}
+
+            {% endfor %}
+       
+        </div>
     {% endif %}
 {% endblock %}

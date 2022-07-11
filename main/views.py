@@ -20,7 +20,6 @@ def user_detail_view(request, user_id):
 def recipe_list_view(request):
     # list out objects, could be search
     qs = Recipe.objects.all().select_related('author_id')
-    # FIXME: JOIN LEFT RECIPE AND USER MODEL
     template_name = 'recipe_list.html'
     context = {"recipe_list": qs}
     return render(request, template_name, context)
@@ -53,7 +52,7 @@ def recipe_detail_view(request, recipe_id):
 
 @login_required(login_url='/login')
 def recipe_update_view(request, recipe_id):
-    obj = get_object_or_404(Recipe, id=str(recipe_id))
+    obj = get_object_or_404(Recipe.objects.filter(id=str(recipe_id)).select_related("author_id"), id=str(recipe_id))
     template_name = 'recipe_update.html'
     context = {"recipe": obj, 'form': None}
     return render(request, template_name, context)
@@ -61,7 +60,7 @@ def recipe_update_view(request, recipe_id):
 
 @login_required(login_url='/login')
 def recipe_delete_view(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
+    recipe = get_object_or_404(Recipe.objects.filter(id=str(recipe_id)).select_related("author_id"), id=str(recipe_id))
     if request.method == "POST":
         r_id = request.POST.get('recipe-id')
         recipe.delete()
@@ -73,3 +72,4 @@ def recipe_delete_view(request, recipe_id):
     return render(request, template_name, context)
 
 # TODO: SECTION 7
+# FIXME: WEIRD STATE AT RECIPE DELET VIEW

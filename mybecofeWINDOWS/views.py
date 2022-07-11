@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.contrib.auth import login, logout, authenticate
+from main.models import user
 
 
 def login_views(request):
@@ -34,8 +35,16 @@ def home_views(request):
 
 @login_required(login_url="/login")
 def users_views(request):
-    return render(request, "users.html",
-                  {"title": "Api for users", "tabs": "myBecoffe - Users", "my_list": [1, 2, 3, 4, 5]})
+    obj = user.objects.all()
+    if request.method == "POST":
+        u_id = request.POST.get('user-id')
+        userToDelete = user.objects.filter(id=u_id)
+        userToDelete.delete()
+        return redirect('/users')
+
+    template_name = 'users.html'
+    context = {"users": obj, "title": "Api for users", "tabs": "myBecoffe - Users"}
+    return render(request, template_name, context)
 
 
 @login_required(login_url="/login")

@@ -6,8 +6,8 @@
 {% block content %}
     <h1>All recipes</h1>
     <p>{{ recipe.title }}</p>
-    <p>{{ recipe.author_id_id }}</p>
-    {% if user.id == recipe.author_id_id %}
+    <p>{{ recipe.author_id.username }}</p>
+    {% if user.id == recipe.author_id_id or user.is_superuser %}
         <form method="POST">
             {% csrf_token %}
             <button type="submit" class="btn-delete-recipe" name="recipe-id" value="{{ recipe.id }}">Delete</button>
