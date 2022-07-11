@@ -2,7 +2,7 @@
 
 {#{% block head_title %}{{ tabs }}{% endblock %}#}
 {% block content %}
-    <form class="register-form" method="post">
+    <form class="register-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="register-submit">Register</button>

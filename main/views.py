@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 
 # Create your views here.
-from mybecofeWINDOWS.forms import RecipeForm
+from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm
 from .models import user, Recipe, Promo
 
 
@@ -13,6 +13,24 @@ def user_detail_view(request, user_id):
     obj = get_object_or_404(user, id=str(user_id))
     template_name = 'user_detail.html'
     context = {"object": obj}
+    return render(request, template_name, context)
+
+
+@login_required(login_url='/login')
+def user_edit_view(request, user_id):
+    obj = get_object_or_404(user.objects.filter(id=str(user_id)))
+    msg = None
+    form = EditProfileForm()
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=obj)
+    if form.is_valid():
+        form.save()
+        msg = 'Data Successfully changed'
+        return redirect('/users')
+
+    form = EditProfileForm(instance=obj)
+    template_name = 'edit_profile.html'
+    context = {"form": form, "profile": obj, "msg": msg}
     return render(request, template_name, context)
 
 

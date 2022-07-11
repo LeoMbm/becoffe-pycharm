@@ -125,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = "users/images/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -135,6 +136,7 @@ LOGIN_REDIRECT_URL = '/users'
 LOGOUT_REDIRECT_URL = '/login'
 AUTH_USER_MODEL = 'main.user'
 LOGIN_URL = '/login'
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 
 INTERNAL_IPS = [
     "127.0.0.1",

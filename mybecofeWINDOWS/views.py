@@ -14,7 +14,7 @@ def login_views(request):
 
 def register_views(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=True)
             return redirect("/login")

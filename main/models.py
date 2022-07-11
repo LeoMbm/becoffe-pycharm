@@ -4,7 +4,7 @@ from django.db import models
 
 class user(AbstractUser):
     Chef = models.BooleanField(default=False)
-    # picture = models.ImageField(upload_to='images')
+    profil_pic = models.ImageField(null=True, blank=True, upload_to="images/")
 
 
 class Promo(models.Model):

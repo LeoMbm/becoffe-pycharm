@@ -8,7 +8,7 @@
             {% for i in users %}
 
                 <div class="card " style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="images/{{ i.profil_pic }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ i.username }}</h5>
                         <hr>
@@ -18,8 +18,12 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger" name="user-id" value="{{ i.id }}">
                                     Delete
-                                    User
+                                    Account
                                 </button>
+                                <a href="{{ i.id }}/edit" class="btn btn-warning">
+                                    Edit
+                                    Account
+                                </a>
                             </form>
                         {% endif %}
 
@@ -29,7 +33,7 @@
                 {#            <h1>{{ i.username }}</h1>#}
 
             {% endfor %}
-       
+
         </div>
     {% endif %}
 {% endblock %}
