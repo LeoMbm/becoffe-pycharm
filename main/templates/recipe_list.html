@@ -3,7 +3,7 @@
 
     {% for r in recipe_list %}
         <h1>{{ r.title }}</h1>
-        <h1>{{ r.user.username }}</h1>
+        <p>Presented by <strong>{{ r.author_id.username }}</strong>, {{ r.preview_at }}</p>
 
     {% endfor %}
 {% endblock %}

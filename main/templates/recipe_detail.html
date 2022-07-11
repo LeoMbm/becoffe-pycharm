@@ -5,4 +5,5 @@
 {% endblock %}
 {% block content %}
     <h1>{{ recipe.title }}</h1>
+    <p>Presented by <strong>{{ recipe.author_id.username }}</strong>, {{ recipe.preview_at }}</p>
 {% endblock %}

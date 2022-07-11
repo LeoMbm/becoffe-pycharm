@@ -19,7 +19,7 @@ def user_detail_view(request, user_id):
 @login_required(login_url='/login')
 def recipe_list_view(request):
     # list out objects, could be search
-    qs = Recipe.objects.all().select_related('user', username=user)
+    qs = Recipe.objects.all().select_related('author_id')
     # FIXME: JOIN LEFT RECIPE AND USER MODEL
     template_name = 'recipe_list.html'
     context = {"recipe_list": qs}
@@ -45,7 +45,7 @@ def recipe_create_view(request):
 @login_required(login_url='/login')
 def recipe_detail_view(request, recipe_id):
     # 1 Object -> detail view
-    obj = get_object_or_404(Recipe, id=str(recipe_id))
+    obj = get_object_or_404(Recipe.objects.filter(id=str(recipe_id)).select_related("author_id"), id=str(recipe_id))
     template_name = 'recipe_detail.html'
     context = {"recipe": obj}
     return render(request, template_name, context)

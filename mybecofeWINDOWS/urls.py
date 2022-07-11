@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/promo', promo_views),
     path('admin/', admin.site.urls),
     path('recipe/create/', recipe_create_view),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
