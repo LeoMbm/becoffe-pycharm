@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    {% if user.id == user.is_superuser or profile.id %}
-        <form method="post">
+    <form method="post">
+        {% if user.id == profile.id or user.is_superuser %}
             {% csrf_token %}
             {{ form }}
             <a href="/password_change" class="btn btn-warning">Change Password</a>
-            <button type="submit" class="btn btn-success">Save Modifications</button>
-        </form>
-    {% endif %}
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            </form>
+        {% endif %}
 {% endblock %}

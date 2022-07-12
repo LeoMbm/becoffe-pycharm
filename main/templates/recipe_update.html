@@ -4,5 +4,11 @@
     Update Recipe
 {% endblock %}
 {% block content %}
-    <h1>UPDATE RECIPE HERE</h1>
+    <form method="post">
+        {% if user.id == recipe.author_id.id %}
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        {% endif %}
+    </form>
 {% endblock %}

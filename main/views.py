@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 
 # Create your views here.
-from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm
+from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm, EditRecipeForm
 from .models import user, Recipe, Promo
 
 
@@ -37,6 +37,11 @@ def user_edit_view(request, user_id):
 @login_required(login_url='/login')
 def recipe_list_view(request):
     # list out objects, could be search
+    if request.method == "POST":
+        r_id = request.POST.get('recipe-id')
+        recipeToDelete = Recipe.objects.filter(id=r_id)
+        recipeToDelete.delete()
+        return redirect('/recipe')
     qs = Recipe.objects.all().select_related('author_id')
     template_name = 'recipe_list.html'
     context = {"recipe_list": qs}
@@ -71,8 +76,17 @@ def recipe_detail_view(request, recipe_id):
 @login_required(login_url='/login')
 def recipe_update_view(request, recipe_id):
     obj = get_object_or_404(Recipe.objects.filter(id=str(recipe_id)).select_related("author_id"), id=str(recipe_id))
+    obj2 = get_object_or_404(Recipe.objects.filter(id=str(recipe_id)))
+    form = EditRecipeForm()
+    if request.method == 'POST':
+        form = EditRecipeForm(request.POST, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/recipe')
+    else:
+        form = RecipeForm(instance=obj)
     template_name = 'recipe_update.html'
-    context = {"recipe": obj, 'form': None}
+    context = {"recipe": obj, 'form': form, "profile": obj2}
     return render(request, template_name, context)
 
 
@@ -88,6 +102,3 @@ def recipe_delete_view(request, recipe_id):
     template_name = 'recipe_delete.html'
     context = {"recipe": obj}
     return render(request, template_name, context)
-
-# TODO: SECTION 7
-# FIXME: WEIRD STATE AT RECIPE DELET VIEW

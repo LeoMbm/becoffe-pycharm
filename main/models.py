@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 
 
-class user(AbstractUser):
+class user(AbstractUser, PermissionsMixin):
     Chef = models.BooleanField(default=False)
     profil_pic = models.ImageField(null=True, blank=True, upload_to="images/")
 

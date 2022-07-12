@@ -4,6 +4,22 @@
     All recipe
 {% endblock %}
 {% block content %}
-    <h1>{{ recipe.title }}</h1>
-    <p>Presented by <strong>{{ recipe.author_id.username }}</strong>, {{ recipe.preview_at }}</p>
+    <div class="card text-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ recipe.title }}</h5>
+            <p class="card-text">Presented by <strong>{{ recipe.author_id.username }}</strong>, {{ recipe.preview_at }}
+            </p>
+            {% if user.id == recipe.author_id_id or user.is_superuser %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" name="recipe-id" value="{{ recipe.id }}">
+                        Delete
+                    </button>
+                    <a href="edit/" class="btn btn-warning">
+                        Edit
+                    </a>
+                </form>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

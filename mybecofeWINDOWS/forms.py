@@ -20,6 +20,14 @@ class EditProfileForm(UserChangeForm):
 
 
 class RecipeForm(forms.ModelForm):
+    preview_at = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Recipe
+        fields = ["title", "preview_at"]
+
+
+class EditRecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ["title", "preview_at"]

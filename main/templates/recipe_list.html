@@ -9,9 +9,12 @@
                 {% if user.id == r.author_id_id or user.is_superuser %}
                     <form method="POST">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger" name="recipe-id" value="{{ recipe.id }}">
+                        <button type="submit" class="btn btn-danger" name="recipe-id" value="{{ r.id }}">
                             Delete
                         </button>
+                        <a href="{{ r.id }}/edit" class="btn btn-warning">
+                            Edit
+                        </a>
                     </form>
                 {% endif %}
             </div>

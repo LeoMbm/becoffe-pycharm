@@ -10,7 +10,8 @@
     {% if user.id == recipe.author_id_id or user.is_superuser %}
         <form method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn-delete-recipe" name="recipe-id" value="{{ recipe.id }}">Delete</button>
+            <button type="submit" class="btn-delete-recipe" name="recipe-id" value="{{ recipe_list.id }}">Delete
+            </button>
         </form>
     {% endif %}
 {% endblock %}
