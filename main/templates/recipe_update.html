@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <form method="post">
-        {% if user.id == recipe.author_id.id %}
+        {% if user.id == recipe.author_id.id or user.is_superuser %}
             {% csrf_token %}
             {{ form }}
             <button type="submit" class="btn btn-success">Save Changes</button>

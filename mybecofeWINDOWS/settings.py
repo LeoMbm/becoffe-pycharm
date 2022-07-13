@@ -132,7 +132,7 @@ MEDIA_URL = "users/images/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/users'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login'
 AUTH_USER_MODEL = 'main.user'
 LOGIN_URL = '/login'

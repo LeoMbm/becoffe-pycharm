@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>This is the page for promo</p>
+    {{ promo.name }}
+    {% for i in promo %}
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <p class="card-text">Guided by <strong>{{ i.admin_id.username }}</strong></p>
+                {% if user.id == i.admin_id or user.is_superuser %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" name="promo-id" value="{{ i.id }}">
+                            Delete
+                        </button>
+                        <a href="{{ i.id }}/edit" class="btn btn-warning">
+                            Edit
+                        </a>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 # TODO: Functionnality for promo

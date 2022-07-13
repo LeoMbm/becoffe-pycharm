@@ -13,19 +13,9 @@
                         <h5 class="card-title">{{ i.username }}</h5>
                         <hr>
                         <p class="card-text">Name: {{ i.first_name }} {{ i.last_name }} <br>Email: {{ i.email }}</p>
-                        {% if user.id == i.id or user.is_superuser %}
-                            <form method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger" name="user-id" value="{{ i.id }}">
-                                    Delete
-                                    Account
-                                </button>
-                                <a href="{{ i.id }}/edit" class="btn btn-warning">
-                                    Edit
-                                    Account
-                                </a>
-                            </form>
-                        {% endif %}
+                        <a href="{{ i.id }}/" class="btn btn-info">
+                            View Profile
+                        </a>
 
                     </div>
                 </div>

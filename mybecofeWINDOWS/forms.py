@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 
-from main.models import Recipe
+from main.models import Recipe, Promo
 
 User = get_user_model()
 
@@ -28,6 +28,14 @@ class RecipeForm(forms.ModelForm):
 
 
 class EditRecipeForm(forms.ModelForm):
+    preview_at = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
     class Meta:
         model = Recipe
         fields = ["title", "preview_at"]
+
+
+class CreatePromoForm(forms.ModelForm):
+    class Meta:
+        model = Promo
+        fields = ["name"]

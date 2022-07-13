@@ -4,12 +4,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 
 # Create your views here.
-from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm, EditRecipeForm
+from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm, EditRecipeForm, CreatePromoForm
 from .models import user, Recipe, Promo
 
 
 @login_required(login_url='/login')
 def user_detail_view(request, user_id):
+    if request.method == "POST":
+        u_id = request.POST.get('user-id')
+        userToDelete = user.objects.filter(id=u_id)
+        userToDelete.delete()
+        return redirect('/users')
     obj = get_object_or_404(user, id=str(user_id))
     template_name = 'user_detail.html'
     context = {"object": obj}
@@ -101,4 +106,33 @@ def recipe_delete_view(request, recipe_id):
     obj = get_object_or_404(Recipe, id=str(recipe_id))
     template_name = 'recipe_delete.html'
     context = {"recipe": obj}
+    return render(request, template_name, context)
+
+
+@login_required(login_url='/login')
+def promo_create_view(request):
+    form = CreatePromoForm()
+    if request.method == 'POST':
+        form = CreatePromoForm(request.POST)
+    if form.is_valid():
+        promo = form.save(commit=False)
+        promo.admin_id_id = request.user.id
+        promo.save()
+        return redirect('/')
+    else:
+        form = CreatePromoForm()
+    print(request.user.id)
+    return render(request, 'promo_create.html', {"form": form})
+
+
+@login_required(login_url='/login')
+def promo_list_view(request):
+    if request.method == "POST":
+        p_id = request.POST.get('promo-id')
+        promoToDelete = Promo.objects.filter(id=p_id)
+        promoToDelete.delete()
+        return redirect('/promo')
+    qs = Promo.objects.all()
+    template_name = 'promo.html'
+    context = {"promo": qs}
     return render(request, template_name, context)
