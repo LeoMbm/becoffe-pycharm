@@ -39,3 +39,11 @@ class CreatePromoForm(forms.ModelForm):
     class Meta:
         model = Promo
         fields = ["name"]
+
+
+class EditPromoForm(forms.ModelForm):
+    # preview_at = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Promo
+        fields = ["name"]

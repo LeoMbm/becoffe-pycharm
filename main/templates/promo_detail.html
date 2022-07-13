@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mx-3"> All learners</h1>
+    <ul class="list-group">
+        {% for i in u_promo %}
+            <li class="list-group-item">{{ i.user_id.username }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

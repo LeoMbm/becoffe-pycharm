@@ -14,7 +14,11 @@ from pathlib import Path
 
 import os
 import dotenv
+import environ
 
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,11 +88,11 @@ WSGI_APPLICATION = 'mybecofeWINDOWS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'becoffe_db',
-        'USER': 'becoffe_admin',
-        'PASSWORD': 'DevInTheCook123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('POSTGRES_DB_NAME'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 

@@ -6,8 +6,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{ i.name }}</h5>
                 <p class="card-text">Guided by <strong>{{ i.admin_id.username }}</strong></p>
-                {% if user.id == i.admin_id or user.is_superuser %}
-                    <form method="POST">
+                <form method="POST">
+                    {% if user.id == i.admin_id or user.is_superuser %}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger" name="promo-id" value="{{ i.id }}">
                             Delete
@@ -15,9 +15,15 @@
                         <a href="{{ i.id }}/edit" class="btn btn-warning">
                             Edit
                         </a>
-                    </form>
-                {% endif %}
+                    {% endif %}
+                    <a href="{{ i.id }}/" class="btn btn-info">
+                        View Learners
+                    </a>
+                </form>
             </div>
+            {% if user.id == i.admin_id or user.is_superuser %}
+                <a href="{{ i.id }}/add">Do you need to add some learners in your class ?</a>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}

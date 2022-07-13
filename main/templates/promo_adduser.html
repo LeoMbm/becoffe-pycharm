@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {% for i in users %}
+            <div class="list-group">
+                {% if not i.is_superuser %}
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" name="user-to-add"
+                               value="{{ i.id }}">
+                        {{ i.username }}
+                    </label>
+                    </div>
+                {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Add user</button>
+    </form>
+{% endblock %}

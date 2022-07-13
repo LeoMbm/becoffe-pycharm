@@ -4,8 +4,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 
 # Create your views here.
-from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm, EditRecipeForm, CreatePromoForm
-from .models import user, Recipe, Promo
+from mybecofeWINDOWS.forms import RecipeForm, RegisterForm, EditProfileForm, EditRecipeForm, CreatePromoForm, \
+    EditPromoForm
+from .models import user, Recipe, Promo, userInPromo
 
 
 @login_required(login_url='/login')
@@ -136,3 +137,41 @@ def promo_list_view(request):
     template_name = 'promo.html'
     context = {"promo": qs}
     return render(request, template_name, context)
+
+
+@login_required(login_url='/login')
+def promo_detail_view(request, promo_id):
+    obj = userInPromo.objects.filter(promo_id_id=str(promo_id)).select_related("user_id")
+    template_name = 'promo_detail.html'
+    context = {"u_promo": obj}
+    return render(request, template_name, context)
+
+
+def promo_edit_view(request, promo_id):
+    obj = get_object_or_404(Promo.objects.filter(id=str(promo_id)).select_related("admin_id"), id=str(promo_id))
+    form = EditPromoForm()
+    if request.method == 'POST':
+        form = EditPromoForm(request.POST, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/promo')
+    else:
+        form = EditPromoForm(instance=obj)
+    template_name = 'recipe_update.html'
+    context = {"promo": obj, 'form': form}
+    return render(request, template_name, context)
+
+
+def promo_add_user_view(request, promo_id):
+    obj = user.objects.all()
+    if request.method == 'POST':
+        p_id = request.POST.getlist('user-to-add')
+        target = userInPromo(promo_id_id=promo_id, user_id_id=p_id)
+        target.save()
+        return redirect('/promo')
+
+    template_name = 'promo_adduser.html'
+    context = {"users": obj}
+    return render(request, template_name, context)
+
+# ADD USER IN PROMO
