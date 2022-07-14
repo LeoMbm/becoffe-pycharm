@@ -14,11 +14,7 @@ from pathlib import Path
 
 import os
 import dotenv
-import environ
 
-env = environ.Env()
-# reading .env file
-environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-kyl#v92+^44z^nv@&#kmw%*5&4gr2q7sq+b-1qs&(_k%*vm06%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['leobecoffe.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -46,8 +42,6 @@ INSTALLED_APPS = [
     'main',
 
 ]
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,12 +81,12 @@ WSGI_APPLICATION = 'mybecofeWINDOWS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('POSTGRES_DB_NAME'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST'),
-        'PORT': env('POSTGRES_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2bokvg3m7nco4',
+        'USER': 'wziacisqhliiai',
+        'PASSWORD': '7b49add419e5faf7e9f057e7988192b2e76cec28c77463259dd8a3ec8effadef',
+        'HOST': 'ec2-3-248-121-12.eu-west-1.compute.amazonaws.com',
+        'PORT': 5432
     }
 }
 
@@ -119,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Brussels'
 
 USE_I18N = True
 
@@ -129,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = "users/images/"
+MEDIA_URL = "images/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
