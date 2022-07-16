@@ -24,6 +24,7 @@ def user_detail_view(request, user_id):
 
 @login_required(login_url='/login')
 def user_edit_view(request, user_id):
+    # FIXME: Can't upload profile picture in edit view
     obj = get_object_or_404(user.objects.filter(id=str(user_id)))
     msg = None
     form = EditProfileForm()

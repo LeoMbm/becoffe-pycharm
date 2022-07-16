@@ -8,7 +8,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
+<<<<<<< HEAD
                                 <img src="/{{ object.profil_pic }}/" alt="Admin"
+=======
+                                <img src="/users/images/{{ object.profil_pic }}/" alt="Profile Image"
+>>>>>>> 2f4cf23 (cross: ubuntu config and fix edit view img)
                                      class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ object.username }}</h4>
@@ -65,7 +69,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    </form>
+
                                     {% if user.id == object.id or user.is_superuser %}
                                         <form method="POST">
                                             {% csrf_token %}
@@ -77,11 +81,15 @@
 
                                             <a class="btn btn-info "
                                                href="edit">Edit</a>
-                                        </div>
+                                        </form>
                                     {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

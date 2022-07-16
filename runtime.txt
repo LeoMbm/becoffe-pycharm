@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 python-3.9.10
+=======
+python-3.10.4
+>>>>>>> 2f4cf23 (cross: ubuntu config and fix edit view img)
